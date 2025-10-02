@@ -29,7 +29,18 @@ app.use(compression())
 app.engine('html', hogan)
 app.set('views', __dirname + '/views')
 app.set('port', process.env.PORT || 3000)
-app.use(express.static(__dirname + '/public'))
+
+// Configure static file serving with proper MIME types
+app.use(express.static(__dirname + '/public', {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css')
+    }
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript')
+    }
+  }
+}))
 app.use((req, res, next) => {
   if (req.url === '/favicon.ico')
     return res.end()

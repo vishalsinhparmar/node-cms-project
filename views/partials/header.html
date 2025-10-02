@@ -4,16 +4,11 @@
 <title>{{ globals.header.metadata.site_title }}</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {{^ is_dev }}
-    <link rel="stylesheet" href="/css/combined.min.css" />
-    <link rel="stylesheet" href="/css/custom-fixes.css" />
-  {{/ is_dev }}
-  {{# is_dev }}
-    <link rel="stylesheet" href="/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/css/css-helpers.min.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/custom-fixes.css" />
-  {{/ is_dev }}
+  <!-- Load CSS files that exist -->
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/css-helpers.min.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/custom-fixes.css" />
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <meta name="description" content="{{ page.metadata.seo_description }}">
   <link rel="icon" type="image/png" href="{{ globals.header.metadata.favicon.imgix_url }}?w=32" sizes="32x32" />
