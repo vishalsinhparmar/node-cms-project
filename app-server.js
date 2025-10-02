@@ -8,12 +8,13 @@ import _ from 'lodash'
 import config from './config'
 import Cosmic from 'cosmicjs'
 
-// Use mock data in development if no valid credentials
+// Use mock data if USE_MOCK_DATA is true or in development
 let bucket
-if (config.USE_MOCK_DATA && process.env.NODE_ENV === 'development') {
-  console.log('🔧 Using mock data for development')
+if (config.USE_MOCK_DATA || process.env.NODE_ENV === 'development') {
+  console.log('🔧 Using mock data for development/demo')
   bucket = require('./helpers/mock-data')
 } else {
+  console.log('🌐 Connecting to Cosmic CMS')
   const api = Cosmic()
   bucket = api.bucket({
     slug: config.COSMIC_BUCKET,
