@@ -41,9 +41,32 @@ app.use(express.static(__dirname + '/public', {
     }
   }
 }))
+// Debug route to check if files exist
+app.get('/debug/files', (req, res) => {
+  const fs = require('fs')
+  const path = require('path')
+  const publicDir = path.join(__dirname, 'public')
+  
+  try {
+    const cssFiles = fs.readdirSync(path.join(publicDir, 'css'))
+    const jsFiles = fs.readdirSync(path.join(publicDir, 'js'))
+    
+    res.json({
+      publicDir: publicDir,
+      cssFiles: cssFiles,
+      jsFiles: jsFiles,
+      customFixesExists: fs.existsSync(path.join(publicDir, 'css', 'custom-fixes.css')),
+      carouselFixExists: fs.existsSync(path.join(publicDir, 'js', 'carousel-fix.js'))
+    })
+  } catch (error) {
+    res.json({ error: error.message, publicDir: publicDir })
+  }
+})
+
 app.use((req, res, next) => {
   if (req.url === '/favicon.ico')
     return res.end()
+  
   // Set global variables
   res.locals.year = new Date().getFullYear()
   // Set dev
@@ -55,7 +78,6 @@ const partials = {
   header: 'partials/header',
   footer: 'partials/footer'
 }
-require('./routes')(app, config, bucket, partials, _)
 const http = http_module.Server(app)
 http.listen(app.get('port'), () => {
   console.info('==> 🌎  Go to http://localhost:%s', app.get('port'));
