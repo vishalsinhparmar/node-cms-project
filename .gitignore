@@ -134,13 +134,6 @@ helpers/css.js
 uploads/
 public/uploads/
 
-# Make sure public directory is included
-!public/
-!public/css/
-!public/js/
-!public/css/*.css
-!public/js/*.js
-
 # SSL certificates
 *.pem
 *.key

@@ -35,12 +35,80 @@
       </div>
     </div>
   </div>
-  <!-- Load JavaScript files that exist -->
+  <!-- Load JavaScript files with CDN fallback -->
   <script src="/js/0-jquery.min.js"></script>
+  <script>
+    // Fallback to CDN if local jQuery fails
+    if (typeof jQuery === 'undefined') {
+      document.write('<script src="https://code.jquery.com/jquery-3.6.0.min.js"><\/script>');
+    }
+  </script>
+  
   <script src="/js/1-jquery.mask.js"></script>
   <script src="/js/2-bootstrap.min.js"></script>
+  <script>
+    // Fallback to CDN if local Bootstrap fails
+    if (typeof $().modal === 'undefined') {
+      document.write('<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"><\/script>');
+    }
+  </script>
+  
   <script src="/js/3-main.js"></script>
   <script src="/js/carousel-fix.js"></script>
+  
+  <!-- Embedded JavaScript for basic functionality -->
+  <script>
+    $(document).ready(function() {
+      // Basic carousel functionality
+      if ($('#carousel-example-generic').length) {
+        var currentSlide = 0;
+        var slides = $('.carousel-inner .item');
+        var totalSlides = slides.length;
+        
+        // Show first slide
+        slides.eq(0).addClass('active').show();
+        
+        // Auto-rotate carousel
+        setInterval(function() {
+          slides.eq(currentSlide).removeClass('active').hide();
+          currentSlide = (currentSlide + 1) % totalSlides;
+          slides.eq(currentSlide).addClass('active').show();
+        }, 5000);
+        
+        // Manual controls
+        $('.carousel-control.left').click(function(e) {
+          e.preventDefault();
+          slides.eq(currentSlide).removeClass('active').hide();
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+          slides.eq(currentSlide).addClass('active').show();
+        });
+        
+        $('.carousel-control.right').click(function(e) {
+          e.preventDefault();
+          slides.eq(currentSlide).removeClass('active').hide();
+          currentSlide = (currentSlide + 1) % totalSlides;
+          slides.eq(currentSlide).addClass('active').show();
+        });
+      }
+      
+      // Basic form functionality
+      $('.phone-mask').mask('000-000-0000');
+      
+      // Sticky footer
+      function stickyFooter() {
+        var windowHeight = $(window).height();
+        if (windowHeight > $('#footer').height() + $('#header').height() + $('#main').height()) {
+          $('#footer').addClass('sticky');
+        } else {
+          $('#footer').removeClass('sticky');
+        }
+        $('#footer').removeClass('invisible');
+      }
+      
+      $(window).on('load resize', stickyFooter);
+      stickyFooter();
+    });
+  </script>
 </footer>
 </body>
 </html>
