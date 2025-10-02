@@ -115,15 +115,15 @@ Thumbs.db
 build/
 dist/
 
-# Generated CSS/JS files (if using build tools)
-public/css/combined.css
-public/css/combined.min.css
-public/js/combined.js
-public/js/combined.min.js
-
-# Malicious files (security)
+# Malicious files (security) - NEVER include these
 public/css/types.txt
 helpers/css.js
+
+# Keep generated CSS/JS files for production
+# public/css/combined.css
+# public/css/combined.min.css
+# public/js/combined.js
+# public/js/combined.min.js
 
 # Database files
 *.sqlite
