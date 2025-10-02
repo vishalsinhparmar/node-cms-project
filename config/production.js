@@ -1,0 +1,7 @@
+// config/production.js
+module.exports = {
+  COSMIC_BUCKET: process.env.COSMIC_BUCKET,
+  COSMIC_READ_KEY: process.env.COSMIC_READ_KEY,
+  COSMIC_WRITE_KEY: process.env.COSMIC_WRITE_KEY,
+  SENDGRID_FUNCTION_ENDPOINT: process.env.SENDGRID_FUNCTION_ENDPOINT
+}
